@@ -1,0 +1,3 @@
+INDEX VERSION 1.130+H:\APCSA_github\APCSA\.metadata\.plugins\org.eclipse.jdt.core
+621196409.index
+1375831279.index
