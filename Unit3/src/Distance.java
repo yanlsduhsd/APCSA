@@ -16,10 +16,7 @@ public class Distance
 	
 	public Distance()
 	{
-		xOne=0;
-		xTwo=0;
-		yOne=1;
-		yTwo=1;
+		setCoordinates();
 
 
 	}

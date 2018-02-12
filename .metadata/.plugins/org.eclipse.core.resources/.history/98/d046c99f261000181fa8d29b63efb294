@@ -1,0 +1,36 @@
+//© A+ Computer Science  -  www.apluscompsci.com
+//Name -
+//Date -
+//Class - 
+//Lab  -
+
+import static java.lang.System.*;
+
+public class Lab11j
+{
+   public static void main(String args[])
+   {
+	   //Triples jefferson = new Triples(40);
+	   //System.out.println(jefferson);
+	   System.out.print(greatestCommonFactor(2,4,8));
+	   
+   }
+   
+   public static int greatestCommonFactor(int a, int b, int c)
+	{
+		int thing;
+		while (c>0) {
+			thing=c;
+			c=a%c;
+			a=thing;
+		}
+		while (b>0) {
+			thing=b;
+			b=b%a;
+			a=thing;
+		}
+		
+		return a;
+
+	}
+}
