@@ -43,7 +43,8 @@ public class Lab14i
 		test.setRoman("XX");
 		out.println("XX is " + test.getNumber() + "\n");
 
-		test.setRoman("XLIX");
-		out.println("XLIX is " + test.getNumber() + "\n");
+		test.setRoman("XXXVIII");
+		out.println("XXXVIII is " + test.getNumber() + "\n");
+		
 	}
 }

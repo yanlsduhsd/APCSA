@@ -12,14 +12,22 @@ public class Grades
 {
 	//instance variables
 	
-	
+	double[] thing;
 
 	//constructor
 
-
+	public Grades() {
+		setGrades(new double[]{});
+	}
+	
+	public Grades(double[] arr) {
+		setGrades(arr);
+	}
 
 	//set method
-
+	public void setGrades(double[] arr) {
+		thing=arr;
+	}
 
 
 	private double getSum()
