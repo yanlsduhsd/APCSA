@@ -34,9 +34,6 @@ public class Grades
 	{
 		double sum=0.0;
 
-		for (double i: thing) {
-			sum+=i;
-		}
 
 
 		return sum;
@@ -46,21 +43,14 @@ public class Grades
 	{
 		double average=0.0;
 
-		average=getSum()/thing.length;
+
 
 		return average;
 	}
 
 
-	public String toString() {
-		String output = "";
-		for (int i=0; i<thing.length; i++) {
-			output+=String.format("grade %s :: %.2f\n",i,thing[i]);
-		}
-		output+=String.format("\naverage = %.2f\n\n",getAverage());
-		return output;
-	}
-	
+	//toString method
+
 
 
 }

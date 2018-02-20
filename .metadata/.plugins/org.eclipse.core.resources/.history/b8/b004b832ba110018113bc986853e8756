@@ -54,10 +54,10 @@ public class Grades
 
 	public String toString() {
 		String output = "";
-		for (int i=0; i<thing.length; i++) {
+		for (int i=1; i<thing.length; i++) {
 			output+=String.format("grade %s :: %.2f\n",i,thing[i]);
 		}
-		output+=String.format("\naverage = %.2f\n\n",getAverage());
+		output+=String.format("\naverage = %.2f\n",getAverage());
 		return output;
 	}
 	
