@@ -79,7 +79,7 @@ public class Deck {
 			shuffled[r]=shuffled[k];
 			shuffled[k]=temp;
 		}
-		cards=shuffled.clone();
+		cards=shuffled;
 		size=cards.length;
 	}
 
