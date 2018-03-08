@@ -32,8 +32,10 @@ public class Test {
 										System.out.printf(" with %s, %s, and %s.\n",board[i],board[j],board[k]);
 										System.out.println(Arrays.toString(board));
 										validmove=true;
+										break;
 									}
 								}
+								break;
 							}
 						}
 						break;

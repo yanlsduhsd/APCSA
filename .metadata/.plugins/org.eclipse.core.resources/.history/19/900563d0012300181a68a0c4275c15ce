@@ -1,0 +1,53 @@
+//© A+ Computer Science  -  www.apluscompsci.com
+//Name -
+//Date -
+//Class -
+//Lab  -
+
+import static java.lang.System.*;
+
+public class Worde implements Comparable<Word> //Actually... let's just use the other one.
+{
+	private String word;
+
+	public Worde( String s)
+	{
+		set(s);
+
+	}
+
+	public void set(String str){
+		word=str;
+	}
+	public String get(){
+		return word;
+	}
+	
+	private int numVowels()
+	{
+		String vowels = "AEIOUaeiou";
+		int vowelCount=0;
+
+
+
+
+
+
+
+		return vowelCount;
+	}
+
+	public int compareTo(Word rhs)
+	{
+
+
+
+	
+		return -1;
+	}
+
+	public String toString()
+	{
+		return word;
+	}
+}

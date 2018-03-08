@@ -1,0 +1,43 @@
+import java.util.Arrays;
+
+public class Numbers {
+	public static void main(String[] args) {
+		/*System.out.println(isGoofy(12));
+		System.out.println(isGoofy(15));
+		System.out.println(isGoofy(26));
+		System.out.println(isGoofy(8));
+		System.out.println(isGoofy(1234));
+		System.out.println(isGoofy(0));*/
+		 char hi='1';
+		System.out.print((int)hi);
+
+	}
+	public static boolean isGoofy(int num) {
+		String numstring = ""+num;
+		for (int i=0; i<numstring.length(); i++) {
+			
+
+		}
+		int sum=0;
+		/*for (int i=0;i<number.length;i++) {
+			if (num%number[i]==0) {
+				sum+=number[i];
+			}
+		}
+		if (sum%2==1) {
+			return true;
+		}*/
+		return false;
+	}
+	public static int[] getSomeGoofyNumbers(int count) {
+		int[] output = new int[count];
+		int counter=1;
+		for (int i=0; i<output.length; i++) {
+			while (!isGoofy(counter)) {
+				counter++;
+			}
+			output[i]=counter;
+		}
+		return output;
+	}
+}
