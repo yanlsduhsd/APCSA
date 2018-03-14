@@ -1,0 +1,65 @@
+//© A+ Computer Science  -  www.apluscompsci.com
+//Name -
+//Date -
+//Class - 
+//Lab  - 
+
+import java.util.ArrayList;
+import java.util.Collections;
+import static java.lang.System.*;
+
+class InsertionSort
+{
+	private ArrayList<String> list;
+
+	public InsertionSort()
+	{
+
+		list = new ArrayList<String>();
+
+		list.add("aaa");
+		list.add("bbb");
+		list.add("ccc");
+
+	}
+
+	//modfiers
+	public void add( String  word)
+	{
+		int loc = 0;
+		
+		
+		
+		if (!list.contains(word)) {
+			loc=Math.abs(Collections.binarySearch(list, word))-1;
+		}
+		list.add(loc, word);
+		for (String str: list) {
+			System.out.print(str+" ");
+		}
+		System.out.println("");
+
+
+
+
+
+
+
+	}
+
+
+	public void remove(String word)
+	{
+
+
+
+
+
+
+	}
+
+	public String toString()
+	{
+		return "";
+	}
+}

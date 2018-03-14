@@ -5,6 +5,7 @@
 //Lab  -
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Scanner;
 import static java.lang.System.*;
@@ -94,18 +95,18 @@ public class Class
 	}
 
 	public void sort() {
-		Student temp;
-		boolean sorted = false;  //this is terrible, but who cares.
+		/*Student temp;
+		boolean sorted = false; 
 		while (!sorted) {
 			sorted = true;
-			/*for (int i=0; i<studentList.length-1; i++) {
-				if (studentList[i].compareTo(studentList[i+1])>0) {
-					temp=studentList[i];
-					studentList[i]=studentList[i+1];
-					studentList[i+1]=temp;
-					sorted = false;
-				}
-			}*/
+			//for (int i=0; i<studentList.length-1; i++) {
+			//	if (studentList[i].compareTo(studentList[i+1])>0) {
+			//		temp=studentList[i];
+			//		studentList[i]=studentList[i+1];
+			//		studentList[i+1]=temp;
+			//		sorted = false;
+			//	}
+			//}
 			for (int i=0; i<studentList.size()-1; i++) {
 				if (studentList.get(i).compareTo(studentList.get(i+1))>0) {
 					studentList.add(i+2,studentList.get(i));
@@ -113,7 +114,8 @@ public class Class
 					sorted = false;
 				}
 			}
-		}
+		}*/
+		Collections.sort(studentList);
 	}
 		
 	/*public String getStudentWithHighestAverage()
@@ -154,16 +156,26 @@ public class Class
 	
 	public String getStudentWithHighestAverage()
 	{
-		sort();
-		//return studentList[studentList.length-1].getName();
-		return studentList.get(studentList.size()-1).getName();
+		int index=0;
+
+		for (int i=0; i<studentList.size()-1; i++) {
+			if (studentList.get(i).compareTo(studentList.get(i+1))==-1) {
+				index=i+1;
+			}
+		}
+		return getStudentName(index);
 	}
 	
 	public String getStudentWithLowestAverage()
 	{
-		sort();
-		//return studentList[0].getName();
-		return studentList.get(0).getName();
+		int index=0;
+
+		for (int i=0; i<studentList.size()-1; i++) {
+			if (studentList.get(i).compareTo(studentList.get(i+1))==1) {
+				index=i+1;
+			}
+		}
+		return getStudentName(index);
 	}
 	
 	public String getFailureList(double failingGrade)

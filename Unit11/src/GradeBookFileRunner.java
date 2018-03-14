@@ -33,7 +33,7 @@ public class GradeBookFileRunner
 			counter++;
 		}
 		
-		//since there is no other input, I will not attempt to enable the addtion of more classes.
+		//since there is no other input, I will not attempt to enable the addition of more classes.
 		
 		
 		out.println(myClasses.get(0));
