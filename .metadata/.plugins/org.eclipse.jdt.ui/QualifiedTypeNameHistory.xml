@@ -3,5 +3,6 @@
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="Card"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
 </qualifiedTypeNameHistroy>

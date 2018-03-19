@@ -40,12 +40,14 @@ public class QuickSort
 		int top=high;
 		
 		while(bot < top){
-			while (list[bot].compareTo(pivot)==-1){
+
+			while (list[bot].compareTo(pivot)<0){
 				bot++;
 			}
-			while (list[top].compareTo(pivot)==1){
+			while (list[top].compareTo(pivot)>0){
 				top--;
 			}
+			
 			if (bot <= top)
 			{
 				Comparable temp;

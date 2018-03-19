@@ -16,8 +16,11 @@ public class Lab22f
 
 		QuickSort.quickSort(new Comparable[]{68,66,11,2,42,31});
 		
+		//QuickSort.quickSort(new Comparable[]{0,0,1,1,-1});
 		
+		//QuickSort.quickSort(new Comparable[]{0, 1, 4, 23, 1, -2344, 47, 34, 34, 0, 0, -9});
 		
+		//QuickSort.quickSort(new Comparable[]{"z", "z", "hi", "ioie", "z", "ioi", "mmm"});
 	}
 }
 
