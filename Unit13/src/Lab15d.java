@@ -17,7 +17,9 @@ public class Lab15d
 	{
 		FancyWords jackson=new FancyWords("");
 		Scanner file =new Scanner(new File("H:\\APCSA_github\\APCSA\\Unit13\\src\\lab15d.dat"));
-		for (int i = file.nextInt(); i>=0; i--){
+		int num = file.nextInt();
+		file.nextLine();
+		for (int i = num; i>0; i--){
 			jackson.setWords(file.nextLine());
 			System.out.println(jackson);
 		}

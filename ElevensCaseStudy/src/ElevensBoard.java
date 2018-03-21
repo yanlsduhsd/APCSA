@@ -78,7 +78,7 @@ public class ElevensBoard extends Board {
 	public boolean anotherPlayIsPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
 		
-		return containsPairSum11(cardIndexes())||containsJQK(cardIndexes());
+		return containsPairSum11(super.cardIndexes())||containsJQK(super.cardIndexes());
 	}
 
 	/**
@@ -123,7 +123,6 @@ public class ElevensBoard extends Board {
 			}
 		}
 		return jack&&queen&&king;
-		
 		
 	}
 }

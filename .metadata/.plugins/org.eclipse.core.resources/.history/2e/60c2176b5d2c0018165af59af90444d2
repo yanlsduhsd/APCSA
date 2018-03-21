@@ -1,0 +1,84 @@
+//© A+ Computer Science  -  www.apluscompsci.com
+//Name -
+//Date -
+//Class -
+//Lab  -
+
+import static java.lang.System.*;
+
+public class AtCounter
+{
+   private char[][] atMat;
+   private int atCount;
+
+	public AtCounter()
+	{
+		atCount=0;
+		atMat = new char[][]{{'@','-','@','-','-','@','-','@','@','@'},
+									{'@','@','@','-','@','@','-','@','-','@'},
+									{'-','-','-','-','-','-','-','@','@','@'},
+									{'-','@','@','@','@','@','-','@','-','@'},
+									{'-','@','-','@','-','@','-','@','-','@'},
+									{'@','@','@','@','@','@','-','@','@','@'},
+									{'-','@','-','@','-','@','-','-','-','@'},
+									{'-','@','@','@','-','@','-','-','-','-'},
+									{'-','@','-','@','-','@','-','@','@','@'},
+									{'-','@','@','@','@','@','-','@','@','@'}};
+	}
+
+	public int countAts(int r, int c)
+	{
+
+		//add in recursive code to count up the # of @s connected
+		//start checking at spot [r,c]
+		
+		atCount=0;
+		countAt(r,c);
+		
+		for (int i=0; i<atMat.length; i++) {
+			for (int j=0; j<atMat[i].length; j++) {
+				if (atMat[i][j]=='a') {
+					atMat[i][j]='@';
+				}
+			}
+		}
+		
+
+
+		return 0;
+	}
+	
+	private void countAt(int r, int c) {
+		if (c>=0&&r>=0&&c<atMat.length&&r<atMat[c].length&&atMat[r][c]=='@') {
+			atCount++;
+			atMat[r][c]='a';
+			countAt(r+1,c);
+			countAt(r-1,c);
+			countAt(r,c+1);
+			countAt(r,c-1);
+		}
+	}
+	
+	public String print() {
+		String output="";
+		for (int i=0; i<atMat.length; i++) {
+			for (int j=0; j<atMat[i].length; j++) {
+				output+=atMat[i][j]+" ";
+			}
+			output+="\n";
+		}
+		return output;
+	}
+
+	public int getAtCount()
+	{
+		return atCount;
+	}
+
+	public String toString()
+	{
+		String output="";
+		output+=getAtCount()+" @s connected.";
+		return output;
+	}
+}
