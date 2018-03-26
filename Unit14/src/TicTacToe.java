@@ -32,7 +32,6 @@ public class TicTacToe
 
 	public String getWinner()
 	{
-		int win=0;
 		for (int i=0; i<mat.length; i++) {
 			if (mat[i][0]==mat[i][1]&&mat[i][0]==mat[i][2]) {
 				return mat[i][0]+" wins horizontally!";

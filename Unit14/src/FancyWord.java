@@ -13,7 +13,7 @@ public class FancyWord
 
 	public FancyWord()
 	{
-		
+		mat = new char[0][0];
 	}
 
    public FancyWord(String s)

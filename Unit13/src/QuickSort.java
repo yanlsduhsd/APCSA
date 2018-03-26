@@ -22,9 +22,9 @@ public class QuickSort
 	private static void quickSort(Comparable[] list, int low, int high)
 	{
 		if (low<high) {
+			int split = partition(list, low, high);
 			System.out.println("pass "+passCount+" "+Arrays.toString(list));
 			passCount++;
-			int split = partition(list, low, high);
 			quickSort(list, low, split);
 			quickSort(list, split+1, high);
 		}
@@ -35,30 +35,26 @@ public class QuickSort
 
 	private static int partition(Comparable[] list, int low, int high)
 	{
-		Comparable pivot=list[low];
-		int bot=low;
-		int top=high;
+		Comparable pivot=list[low], temp;
+		int bot=low-1;
+		int top=high+1;
 		
 		while(bot < top){
 
-			while (list[bot].compareTo(pivot)<0){
-				bot++;
-			}
-			while (list[top].compareTo(pivot)>0){
-				top--;
-			}
+			while (list[++bot].compareTo(pivot)<0);
+			while (list[--top].compareTo(pivot)>0);
 			
-			if (bot <= top)
+			if (bot >= top)
 			{
-				Comparable temp;
-				temp= list[bot];
-				list[bot]=list[top];
-				list[top]=temp;
+				return top;
 			}
-			
+
+			temp= list[bot];
+			list[bot]=list[top];
+			list[top]=temp;
 			
 		}
-		return bot;
+		return 0;
 	
 	}
 }
