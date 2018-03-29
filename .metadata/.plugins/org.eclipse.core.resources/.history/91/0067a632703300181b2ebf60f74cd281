@@ -1,0 +1,4 @@
+public class DogRunner {
+	Dog thing = new UnderDog();
+	thing.a();
+}
