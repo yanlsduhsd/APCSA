@@ -111,25 +111,59 @@ public class Ball extends Block implements Collidable
 	@Override
 	public boolean didCollideLeft(Object obj) {
 		// TODO Auto-generated method stub
+		
+		Block b = (Block) obj;
+		
+		if (getY()+getYSpeed()+getHeight()>=b.getY()&&getY()+getYSpeed()<=b.getY()+b.getHeight()
+				&&getX()+getXSpeed()<b.getX()+b.getWidth()&&getX()>=b.getX()+b.getWidth()) {
+			return true;
+		}
+		
 		return false;
 	}
-
+	
+	
 	@Override
 	public boolean didCollideRight(Object obj) {
 		// TODO Auto-generated method stub
+		
+		Block b = (Block) obj;
+		
+		if (getY()+getYSpeed()+getHeight()>=b.getY()&&getY()+getYSpeed()<=b.getY()+b.getHeight()
+				&&getX()+getXSpeed()+getWidth()>b.getX()&&getX()+getWidth()<=b.getX()) {
+			return true;
+		}
+		
 		return false;
 	}
-
+	
 	@Override
 	public boolean didCollideTop(Object obj) {
 		// TODO Auto-generated method stub
+	
+		Block b = (Block) obj;
+		
+		if (getX()+getXSpeed()+getWidth()>=b.getX()&&getX()+getXSpeed()<=b.getWidth()+b.getX()
+				&&getY()+getYSpeed()<b.getY()+b.getHeight()&&getY()>=b.getY()+b.getHeight()) {
+			return true;
+		}
+		
 		return false;
 	}
-
+	
 	@Override
 	public boolean didCollideBottom(Object obj) {
 		// TODO Auto-generated method stub
+		
+		Block b = (Block) obj;
+		
+		if (getX()+getXSpeed()+getWidth()>=b.getX()&&getX()+getXSpeed()<=b.getWidth()+b.getX()
+				&&getY()+getYSpeed()+getHeight()>b.getY()&&getY()+getHeight()<=b.getY()) {
+			return true;
+		}
+		
 		return false;
 	}
+	
 
 }
