@@ -1,9 +1,0 @@
-public class Dog {
-	public void a() {
-		System.out.print("r");
-		eat();
-	}
-	public void eat() {
-		System.out.print("eat");
-	}
-}
