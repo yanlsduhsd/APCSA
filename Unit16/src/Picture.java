@@ -331,7 +331,7 @@ public void fixUnderwater()
   
   public void mirrorGull()
   {
-	    int mirrorPoint = 224;
+	    int mirrorPoint = 345;
 	    Pixel leftPixel = null;
 	    Pixel rightPixel = null;
 	    int count = 0;
@@ -341,13 +341,13 @@ public void fixUnderwater()
 	    for (int row = 234; row < 320; row++)
 	    {
 	      // loop from 13 to just before the mirror point
-	      for (int col = 342; col > mirrorPoint; col--)
+	      for (int col = 233; col < mirrorPoint; col++)
 	      {
 	        
-	        rightPixel = pixels[row][col];      
-	        leftPixel = pixels[row]                       
-	                         [-1*Math.abs(mirrorPoint - col) + mirrorPoint];
-	        leftPixel.setColor(rightPixel.getColor());
+	        leftPixel = pixels[row][col];      
+	        rightPixel = pixels[row]                       
+	                         [Math.abs(mirrorPoint - col) + mirrorPoint];
+	        rightPixel.setColor(leftPixel.getColor());
 	      }
 	    }
 	  }

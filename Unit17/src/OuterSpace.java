@@ -19,17 +19,18 @@ import java.util.ArrayList;
 public class OuterSpace extends Canvas implements KeyListener, Runnable
 {
 	private Ship ship;
-	private Alien alienOne;
-	private Alien alienTwo;
+//	private Alien alienOne;
+//	private Alien alienTwo;
 
-	/* uncomment once you are ready for this part
-	 *
-   private AlienHorde horde;
+    private AlienHorde horde;
 	private Bullets shots;
-	*/
+
+	private boolean fire;
 
 	private boolean[] keys;
 	private BufferedImage back;
+	
+//	private Ammo ammo;
 
 	public OuterSpace()
 	{
@@ -39,6 +40,24 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 		//instantiate other instance variables
 		//Ship, Alien
+		ship = new Ship(100,100,30,30,2);
+		
+		horde = new AlienHorde(0);
+//		horde.add(new Alien(200,100,30,30,1));
+//		horde.add(new Alien(100,200,30,30,1));
+		
+		for (int i=150; i<=735; i+=90) {
+			for (int j=15; j<=255; j+=60) {
+				horde.add(new Alien(i,j,30,30,1));
+			}
+		}
+		
+		shots = new Bullets();
+		fire = true;
+		
+//		alienOne = new Alien(200,100,30,30,1);
+//		alienTwo = new Alien(100,200,30,30,1);
+//		ammo = new Ammo(50,50,2);
 
 		this.addKeyListener(this);
 		new Thread(this).start();
@@ -65,14 +84,34 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		//we will draw all changes on the background image
 		Graphics graphToBack = back.createGraphics();
 
-		graphToBack.setColor(Color.BLUE);
-		graphToBack.drawString("StarFighter ", 25, 50 );
+//		graphToBack.setColor(Color.BLUE);
+//		graphToBack.drawString("StarFighter ", 25, 50 );
 		graphToBack.setColor(Color.BLACK);
 		graphToBack.fillRect(0,0,800,600);
-
+		
+		
+		
 		if(keys[0] == true)
 		{
 			ship.move("LEFT");
+		}
+		if(keys[1] == true)
+		{
+			ship.move("RIGHT");
+		}
+		if(keys[2] == true)
+		{
+			ship.move("UP");
+		}
+		if(keys[3] == true)
+		{
+			ship.move("DOWN");
+		}
+		
+
+		if(keys[4] && fire) {
+			shots.add(new Ammo(ship.getX()+(int)(ship.getWidth()*0.5)-5,ship.getY()+(int)(ship.getHeight()*0.5)-5,3));
+			fire=false;
 		}
 
 		//add code to move Ship, Alien, etc.
@@ -80,8 +119,39 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 		//add in collision detection to see if Bullets hit the Aliens and if Bullets hit the Ship
 
+		graphToBack.setColor(Color.GRAY);
+		for (int i=1; i<783; i+=10) {
+			graphToBack.fillRect(i, 515, 6, 1);
+		}
+		
+		horde.drawEmAll(graphToBack);
+		shots.drawEmAll(graphToBack);
+		
+		ship.draw(graphToBack);
+		
+		horde.moveEmAll();
+		shots.moveEmAll();
+		
+		horde.removeDeadOnes(shots.getList());
+		shots.cleanEmUp();
 
+		
+//		graphToBack.setColor(Color.BLUE);
+//		graphToBack.fillRect(ship.getX(), ship.getY(), 15, 15);
+//		graphToBack.setColor(Color.RED);
+//		graphToBack.fillRect(ship.getX()+15, ship.getY()+15, 15, 15);
+		
+		graphToBack.setColor(Color.RED);
+		graphToBack.fillRect(0, 560, 784, 1);
+		graphToBack.fillRect(783, 0, 1, 561);
+		graphToBack.fillRect(0, 0, 784, 1);
+		graphToBack.fillRect(0, 0, 1, 561);
+		
+		
+		
 		twoDGraph.drawImage(back, null, 0, 0);
+		
+		
 	}
 
 
@@ -131,6 +201,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		if (e.getKeyCode() == KeyEvent.VK_SPACE)
 		{
 			keys[4] = false;
+			fire = true;
 		}
 		repaint();
 	}

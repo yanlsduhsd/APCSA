@@ -21,6 +21,6 @@ public class Shiptest
         Ship test3 = new Ship(7,7,6,5,1);
         test3.setX(3);
         test3.setY(5);
-        System.out.println("Ship 3 " + test2);
+        System.out.println("Ship 3 " + test3);
     }
 }
