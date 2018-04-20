@@ -1,0 +1,70 @@
+//© A+ Computer Science  -  www.apluscompsci.com
+//Name -
+//Date - 
+//Class -
+//Lab  -
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import javax.imageio.ImageIO;
+import java.util.ArrayList;
+import java.util.List;
+
+public class AlienHorde2
+{
+	private List<Alien> aliens;
+
+	public AlienHorde2()
+	{
+		aliens = new ArrayList<Alien>();
+
+	}
+
+	public void add(Alien1 al)
+	{
+		aliens.add(al);
+	}
+
+	public void drawEmAll( Graphics window )
+	{
+		for (Alien a:aliens) {
+			a.draw(window);
+		}
+	}
+
+	public void moveEmAll()
+	{
+		for (Alien a: aliens) {
+			
+			a.move();
+
+		}
+	}
+
+	public void removeDeadOnes(List<Ammo> shots)
+	{
+		
+		for (int i=0; i<aliens.size(); i++) {
+			if (aliens.get(i).getY()>=510||aliens.get(i).getLf()<1) {
+				aliens.remove(i--);
+				break;
+			}
+			
+			for (int j=0; j<shots.size(); j++) {
+				if (shots.get(j).getX()<aliens.get(i).getX()+aliens.get(i).getWidth()&&shots.get(j).getX()+shots.get(j).getWidth()>aliens.get(i).getX()
+						&&shots.get(j).getY()<aliens.get(i).getY()+aliens.get(i).getHeight()&&shots.get(j).getY()+shots.get(j).getHeight()>aliens.get(i).getY()) {
+					aliens.get(i).dec(1);
+					shots.remove(j);
+				}
+			}
+			
+		}
+	}
+
+	public String toString()
+	{
+		return "";
+	}
+}
