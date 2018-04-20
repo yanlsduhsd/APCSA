@@ -35,7 +35,7 @@ public class Alien extends MovingThing
 
 	public Alien(int x, int y, int w, int h, int s)
 	{
-		super(x, y, w,h);
+		super(x, y, w, h);
 		speed=s;
 		try
 		{
