@@ -17,32 +17,33 @@ public class Ammo extends MovingThing
 
 	public Ammo()
 	{
-		this(0,0,0);
+		this(0,0,0,0);
 	}
 
 	public Ammo(int x, int y)
 	{
 		//add code
-		this(x,y,0);
+		this(x,y,0,0);
 	}
 
-	public Ammo(int x, int y, int s)
+	public Ammo(int x, int y, int s, int d)
 	{
 		//add code
 		super(x,y,10,10);
 		setSpeed(s);
-		setD(20);
+		setD(d);
 	}
 
-	public Ammo(int x, int y, int w, int h, int s) {
+	public Ammo(int x, int y, int w, int h, int s, int d) {
 		super(x,y,w,h);
 		setSpeed(s);
-		setD(20);
+		setD(d);
 	}
 	
-	public void set(int x, int y, int w, int h, int s) {
+	public void set(int x, int y, int w, int h, int s, int d) {
 		super.set(x, y, w, h);
 		setSpeed(s);
+		setD(d);
 	}
 	
 	public void setSpeed(int s)

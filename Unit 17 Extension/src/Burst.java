@@ -17,20 +17,18 @@ public class Burst extends Ammo
 	public Burst()
 	{
 		this(5,5,1,0);
-		setD(8);
 	}
 	
 	public Burst(int x, int y, int s, int dir)
 	{
-		super(x,y,4,4,s);
-		setD(8);
+		super(x,y,4,4,s,12);
 		direction = dir;
 	}
 
-	public Burst(int x, int y, int w, int h, int s, int dir) {
+	public Burst(int x, int y, int w, int h, int s, int d, int dir) {
 		set(x,y,w,h);
 		setSpeed(s);
-		setD(8);
+		setD(d);
 		direction = dir;
 	}
 
