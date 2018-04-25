@@ -1,0 +1,52 @@
+//© A+ Computer Science  -  www.apluscompsci.com
+//Name -
+//Date -
+//Class - 
+//Lab  -
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import javax.imageio.ImageIO;
+
+public class Circle extends Ammo
+{
+	private int angle;
+	private int r;
+
+	public Circle()
+	{
+		this(5,5,1,0);
+	}
+	
+	public Circle(int x, int y, int s, int ang)
+	{
+		super(x,y,4,4,s,12);
+		angle = ang;
+	}
+
+	public Circle(int x, int y, int w, int h, int s, int d, int ang) {
+		set(x,y,w,h);
+		setSpeed(s);
+		setD(d);
+		angle = ang;
+	}
+
+	public void draw( Graphics window )
+	{
+		//add code to draw the ammo
+		window.setColor(Color.GREEN);
+		window.fillOval(getX(), getY(), getWidth(), getHeight());
+	}
+	
+	public void move() {
+		angle+=5*getSpeed();
+		setPos((int)(Math.cos(angle)*r),(int)(Math.sin(angle)*r));
+	}
+
+	public String toString()
+	{
+		return super.toString()+" "+getSpeed();
+	}
+}

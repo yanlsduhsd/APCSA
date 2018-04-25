@@ -107,7 +107,7 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 		}
 		
 
-		if(keys[4] == true && counter==160 && selected!=3) {
+		if(keys[4] == true && counter==160) {
 			if (selected==0) shots.add(new Ammo(ship.getX()+(int)(ship.getWidth()*0.5)-5,ship.getY()+(int)(ship.getHeight()*0.5)-5,3,20));
 			if (selected==1) for (int i=0; i<8; i++) shots.add(new Burst(ship.getX()+(int)(ship.getWidth()*0.5)-2,ship.getY()+(int)(ship.getHeight()*0.5)-2,2,i));
 			if (selected==2) shots.add(new Ammo(ship.getX()+(int)(ship.getWidth()*0.5)-2,ship.getY()+(int)(ship.getHeight()*0.5)-2,4,4,5,4));
@@ -115,7 +115,7 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 		}
 		
 		if (selected==3 && counter==160) {
-			shots.add(new Circle(ship.getX()+(int)(ship.getWidth()*0.5)-3,ship.getY()+(int)(ship.getHeight()*0.5)-3,1,0));
+			shots.add(new Circle(ship.getX()+(int)(ship.getWidth()*0.5)-3,ship.getY()+(int)(ship.getHeight()*0.5)-3,2,0));
 			counter=0;
 		}
 		
@@ -182,9 +182,7 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 			horde.moveEmAll();
 		}
 		
-		if (selected!=3) shots.moveEmAll(0,0,-1);
-		else if (keys[4]) shots.moveEmAll(ship.getX()+(int)(ship.getWidth()*0.5), ship.getY()+(int)(ship.getHeight()*0.5), 120);
-		else shots.moveEmAll(ship.getX()+(int)(ship.getWidth()*0.5), ship.getY()+(int)(ship.getHeight()*0.5),60);
+		shots.moveEmAll(ship.getX(), ship.getY(), 40);
 		
 		horde.removeDeadOnes(shots.getList());
 		shots.cleanEmUp();

@@ -39,7 +39,7 @@ public class Burst extends Ammo
 		window.fillRect(getX(), getY(), getWidth(), getHeight());
 	}
 	
-	public void move(int x, int y, int r) {
+	public void move(int x, int y, int angle) {
 		if (direction==0) for (int i=0; i<getSpeed()*3; i++) super.move("UP");
 		else if (direction==2) for (int i=0; i<getSpeed()*3; i++) super.move("RIGHT");
 		else if (direction==4) for (int i=0; i<getSpeed()*3; i++) super.move("DOWN");

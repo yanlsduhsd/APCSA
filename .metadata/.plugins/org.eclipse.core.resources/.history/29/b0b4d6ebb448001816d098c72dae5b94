@@ -34,10 +34,10 @@ public class Bullets
 		}
 	}
 
-	public void moveEmAll(int shipX, int shipY, int radius)
+	public void moveEmAll()
 	{
 		for (Ammo a: ammo) {
-			a.move(shipX, shipY, radius);
+			a.move();
 		}
 	}
 
