@@ -14,25 +14,34 @@ import javax.imageio.ImageIO;
 public class Alien1a extends Alien1
 {
 
+	int leftBound, rightBound;
+	
 	public Alien1a()
 	{
-		this(0,0,30,30,0,1);
+		this(0,0,30,30,0,1,0,783);
 	}
 
-	public Alien1a(int x, int y, int w, int h, int s, int l)
+	public Alien1a(int x, int y, int w, int h, int s, int l, int lBound, int rBound)
 	{
 		super(x, y, w, h, s, l);
+		setBounds(lBound, rBound);
 	}
 	
-	public void set(int x, int y, int w, int h, int s, int l) {
+	public void set(int x, int y, int w, int h, int s, int l, int lB, int rB) {
 		super.set(x, y, w, h, s, l);
+		setBounds(lB, rB);
 	}
 
+	public void setBounds(int lB, int rB) {
+		leftBound=lB;
+		rightBound=rB;
+	}
+	
     public void move()
 	{
-    	if (getY()%60==1&&getX()+getWidth()+getSpeed()<=783) {
+    	if (getY()%60==1&&getX()+getWidth()+getSpeed()<=rightBound) {
     		for (int i=0; i<getSpeed(); i++) super.move("RIGHT");
-		} else if (getY()%60==31&&getX()-getSpeed()>0){
+		} else if (getY()%60==31&&getX()-getSpeed()>leftBound){
 			for (int i=0; i<getSpeed(); i++) super.move("LEFT");
 		} else {
 			super.move("DOWN");

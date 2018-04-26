@@ -26,8 +26,9 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 	private boolean[] keys;
 	private BufferedImage back;
 	private int counter;
-	private long clock;
+	private int clock;
 	private int selected;
+	private int approxAngle;
 
 	public OuterSpace2()
 	{
@@ -41,7 +42,7 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 
 		for (int i=150; i<=735; i+=90) {
 			for (int j=15; j<=255; j+=60) {
-				horde.add(new Alien1a(i,j,30,30,3,20));
+				horde.add(new Alien1a(i,j,30,30,3,20,0,783));
 			}
 		}
 		
@@ -81,7 +82,7 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 		if (counter<160&&selected==2) counter+=10;
 		if (counter<160&&selected==3) counter+=2;
 		
-		if (clock>20000) clock=0;
+		if (clock>2000000) clock=0;
 		else clock++;
 		
 		graphToBack.setColor(Color.BLUE);
@@ -114,9 +115,16 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 			counter=0;
 		}
 		
-		if (selected==3 && counter==160) {
-			shots.add(new Circle(ship.getX()+(int)(ship.getWidth()*0.5)-3,ship.getY()+(int)(ship.getHeight()*0.5)-3,1,0));
-			counter=0;
+		if (selected==3) {
+			if (approxAngle==360000) approxAngle=0;
+			approxAngle++;
+			if (counter==160) {
+				int rand = shots.getRandomCircleId();
+				if (rand!=-1) {
+					shots.add(new Circle(ship.getX()+(int)(ship.getWidth()*0.5)-3,ship.getY()+(int)(ship.getHeight()*0.5)-3,1,rand*40+approxAngle,rand));
+					counter=0;
+				}
+			}
 		}
 		
 		if (keys[5]) {
@@ -128,8 +136,9 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 		} else if (keys[7]) {
 			if (selected!=2) counter=0;
 			selected=2;
-		} else if (keys[8]) {
-			if (selected!=3) counter=0;
+		} else if (keys[8] && selected!=3) {
+			counter=0;
+			approxAngle=0;
 			selected=3;
 		}
 		
@@ -147,7 +156,16 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 		if (keys[16] == true && counter==160) {
 			for (int i=150; i<=735; i+=90) {
 				for (int j=15; j<=255; j+=60) {
-					horde.add(new Alien1a(i,j,30,30,3,20));
+					horde.add(new Alien1a(i,j,30,30,3,20,0,783));
+				}
+			}
+			counter=0;
+		}
+		
+		if (keys[15] == true && counter==160) {
+			for (int i=210; i<=570; i+=90) {
+				for (int j=15; j<=255; j+=60) {
+					horde.add(new Alien1a(i,j,30,30,3,20,200,583));
 				}
 			}
 			counter=0;
@@ -182,7 +200,7 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 			horde.moveEmAll();
 		}
 		
-		if (selected!=3) shots.moveEmAll(0,0,-1);
+		if (selected!=3) shots.moveEmAll(1000,1000,-1);
 		else if (keys[4]) shots.moveEmAll(ship.getX()+(int)(ship.getWidth()*0.5), ship.getY()+(int)(ship.getHeight()*0.5), 120);
 		else shots.moveEmAll(ship.getX()+(int)(ship.getWidth()*0.5), ship.getY()+(int)(ship.getHeight()*0.5),60);
 		
@@ -218,6 +236,9 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 			g.fillRect(62, 33, 4, 4);
 			g.fillRect(70, 33, 4, 4);
 			
+			g.setColor(Color.GREEN);
+			g.drawOval(82, 29, 12, 12);
+			
 			g.setColor(Color.RED);
 			if (a==0) {
 				g.drawRoundRect(11, 26, 18, 17, 3, 3);
@@ -225,6 +246,8 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 				g.drawRoundRect(31, 26, 17, 17, 3, 3);
 			} else if (a==2) {
 				g.drawRoundRect(50, 26, 28, 17, 3, 3);
+			} else if (a==3) {
+				g.drawRoundRect(79, 26, 19, 18, 3, 3);
 			}
 	}
 
@@ -283,6 +306,10 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 		{
 			keys[18] = true;
 		}
+		if (e.getKeyCode() == KeyEvent.VK_T)
+		{
+			keys[15] = true;
+		}
 		repaint();
 	}
 
@@ -339,6 +366,10 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 		if (e.getKeyCode() == KeyEvent.VK_R)
 		{
 			keys[18] = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_T)
+		{
+			keys[15] = false;
 		}
 		repaint();
 	}

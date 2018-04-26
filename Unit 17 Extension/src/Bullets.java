@@ -15,12 +15,25 @@ import java.util.List;
 public class Bullets
 {
 	private List<Ammo> ammo;
+	private List<Integer> circles;
 
 	public Bullets()
 	{
 		ammo=new ArrayList<Ammo>();
+		circles=new ArrayList<Integer>();
+		
+		for (int i=0; i<9; i++) circles.add(i);
 	}
 
+	public int getRandomCircleId() {
+		if (circles.size()==0) return -1;
+		int id, rand;
+		rand=(int)(Math.random()*circles.size());
+		id=circles.get(rand);
+		circles.remove(rand);
+		return id;
+	}
+	
 	public void add(Ammo al)
 	{
 		ammo.add(al);
@@ -36,8 +49,12 @@ public class Bullets
 
 	public void moveEmAll(int shipX, int shipY, int radius)
 	{
+		circles.clear();
+		for (int i=0; i<9; i++) circles.add(i); //who cares about efficiency
+		
 		for (Ammo a: ammo) {
 			a.move(shipX, shipY, radius);
+			if (circles.contains(a.getId())) circles.remove(circles.indexOf(a.getId()));
 		}
 	}
 

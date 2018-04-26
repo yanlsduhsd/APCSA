@@ -79,6 +79,10 @@ public class Ammo extends MovingThing
 		for (int i = 0; i<getSpeed(); i++) move("UP");
 	}
 	
+	public int getId() {
+		return -1;
+	}
+	
 	
 	public void move( String direction )
 	{
