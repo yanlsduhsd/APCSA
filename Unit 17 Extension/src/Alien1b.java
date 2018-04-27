@@ -30,18 +30,18 @@ public class Alien1b extends Alien1
 
     public void move()
 	{
-    	if (getY()%90<15||(getY()%90<45&&getY()%90>29)) {
+    	if (getY()%120<20||(getY()%120<60&&getY()%120>39)) {
     		for (int i=0; i<getSpeed(); i++) {
         		super.move("RIGHT");
         	}
     		super.move("DOWN");
-		} else if (getY()%90<30) {
+		} else if (getY()%120<40) {
     		for (int i=0; i<2*getSpeed(); i++) {
         		super.move("RIGHT");
         	}
     		super.move("DOWN");
-		} else if (getY()%90<60||getY()>74){
-			for (int i=0; i<2*getSpeed(); i++) {
+		} else if (getY()%120<80||getY()%120>99){
+			for (int i=0; i<getSpeed(); i++) {
         		super.move("LEFT");
         	}
 			super.move("DOWN");

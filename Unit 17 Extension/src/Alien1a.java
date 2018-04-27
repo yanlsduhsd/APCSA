@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
 public class Alien1a extends Alien1
 {
 
-	int leftBound, rightBound;
+	private int leftBound, rightBound;
 	
 	public Alien1a()
 	{
