@@ -189,9 +189,9 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 			}
 		}
 		
-//		if(keys[14] && keys[3]) clock=0;
-//		else if (keys[14] && keys[1]) clock+=10;
-//		else if (keys[14] && keys[0]) clock-=10;
+		if(keys[14] && keys[3]) clock=0;
+		else if (keys[14] && keys[1]) clock+=10;
+		else if (keys[14] && keys[0]) clock-=10;
 
 		graphToBack.setColor(Color.GRAY);
 		for (int i=1; i<783; i+=10) {

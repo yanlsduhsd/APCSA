@@ -29,13 +29,12 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 	private int clock;
 	private int selected;
 	private int approxAngle;
-	private int score;
 
 	public OuterSpace2()
 	{
 		setBackground(Color.black);
 
-		keys = new boolean[12];
+		keys = new boolean[20];
 
 		ship = new Ship(360,500,30,30,2);
 		
@@ -47,8 +46,6 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 		selected=0;
 		
 		shots = new Bullets();
-		
-		score = 0;
 		
 		this.addKeyListener(this);
 		new Thread(this).start();
@@ -85,9 +82,7 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 		create();		
 		
 		graphToBack.setColor(Color.WHITE);
-//		graphToBack.drawString(""+clock, 600, 20);
-		
-		graphToBack.drawString("Score: "+score, 700, 30);
+		graphToBack.drawString(""+clock, 600, 20);
 		
 		graphToBack.setColor(Color.BLUE);
 		graphToBack.fillRect(10, 10, counter, 10);
@@ -147,51 +142,49 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 		
 		
 		
-		if(keys[9]) {
-			if (keys[10]) {
-				for (int i=0; i<9; i++) {
-					int x=ship.getX()+(int)(ship.getWidth()*0.5)-5+30*(i%3-1);
-					int y=ship.getY()+(int)(ship.getHeight()*0.5)-5+30*(i/3);
-					if (x>0&&x+5<783&&y>0)
-					shots.add(new Ammo(x,y,3,20));
-				}
-				counter=0;
+		if(keys[9] == true) {
+			for (int i=0; i<9; i++) {
+				int x=ship.getX()+(int)(ship.getWidth()*0.5)-5+30*(i%3-1);
+				int y=ship.getY()+(int)(ship.getHeight()*0.5)-5+30*(i/3);
+				if (x>0&&x+5<783&&y>0)
+				shots.add(new Ammo(x,y,3,20));
 			}
-//		if (keys[0] == true && counter==160) {
-//			for (int i=150; i<=735; i+=90) {
-//				for (int j=15; j<=255; j+=60) {
-//					horde.add(new Alien1a(i,j,30,30,3,20,0,783));
-//				}
-//			}
-//			counter=0;
-//		}
-//		
-//		if (keys[0] == true && counter==160) {
-//			for (int i=210; i<=570; i+=90) {
-//				for (int j=15; j<=255; j+=60) {
-//					horde.add(new Alien1a(i,j,30,30,3,20,200,583));
-//				}
-//			}
-//			counter=0;
-//		}
-//		
-//		if (keys[0] == true && counter==160) {
-//			horde.add(new Alien1b((int)(Math.random()*750)+15,30,30,30,1,10));
-//			//horde.add(new Alien1c(400,100,30,30,1,20,new int[]{2003,2001,2000}));
-//			counter=0;
-//		}
-		
-			if(keys[11] == true) {
-				for (int i=0; i<8; i++) {
-					shots.add(new Burst(ship.getX()+(int)(ship.getWidth()*0.5)-2,ship.getY()+(int)(ship.getHeight()*0.5)-2,2,i));
+			counter=0;
+		}
+		if (keys[16] == true && counter==160) {
+			for (int i=150; i<=735; i+=90) {
+				for (int j=15; j<=255; j+=60) {
+					horde.add(new Alien1a(i,j,30,30,3,20,0,783));
 				}
-				counter=0;
 			}
+			counter=0;
 		}
 		
-//		if(keys[14] && keys[3]) clock=0;
-//		else if (keys[14] && keys[1]) clock+=10;
-//		else if (keys[14] && keys[0]) clock-=10;
+		if (keys[15] == true && counter==160) {
+			for (int i=210; i<=570; i+=90) {
+				for (int j=15; j<=255; j+=60) {
+					horde.add(new Alien1a(i,j,30,30,3,20,200,583));
+				}
+			}
+			counter=0;
+		}
+		
+		if (keys[17] == true && counter==160) {
+			horde.add(new Alien1b((int)(Math.random()*750)+15,30,30,30,1,10));
+			//horde.add(new Alien1c(400,100,30,30,1,20,new int[]{2003,2001,2000}));
+			counter=0;
+		}
+		
+		if(keys[18] == true) {
+			for (int i=0; i<8; i++) {
+				shots.add(new Burst(ship.getX()+(int)(ship.getWidth()*0.5)-2,ship.getY()+(int)(ship.getHeight()*0.5)-2,2,i));
+			}
+			counter=0;
+		}
+		
+		if(keys[14] && keys[3]) clock=0;
+		else if (keys[14] && keys[1]) clock+=10;
+		else if (keys[14] && keys[0]) clock-=10;
 
 		graphToBack.setColor(Color.GRAY);
 		for (int i=1; i<783; i+=10) {
@@ -212,7 +205,7 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 		else if (keys[4]) shots.moveEmAll(ship.getX()+(int)(ship.getWidth()*0.5), ship.getY()+(int)(ship.getHeight()*0.5), 120);
 		else shots.moveEmAll(ship.getX()+(int)(ship.getWidth()*0.5), ship.getY()+(int)(ship.getHeight()*0.5),60);
 		
-		score+=horde.removeDeadOnes(shots.getList());
+		horde.removeDeadOnes(shots.getList());
 		shots.cleanEmUp();
 
 		graphToBack.setColor(Color.RED);
@@ -275,7 +268,7 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 		} else if (clock==10501) {
 			for (int i=20; i<=320; i+=50) for (int j=20; j<=320; j+=50) horde.add(new Alien1c(i,j,30,30,3,20,new int[]{1331,333,1330,332,1331,333,1330,332,1331,333,1330,332,661}));
 		} else if (clock==15000) {
-			horde.add(new Alien1c(340,30,100,100,1,800,new int[]{4009,1003,4009,1003,4009}));
+			horde.add(new Alien1c(340,30,100,100,1,2000,new int[]{2009,1003,2009,1003,2009}));
 		} else if (clock>15000&&clock<=17000&&clock%250==0) {
 			horde.add(new Alien1a(50,20,30,30,3,20,50,250));
 			horde.add(new Alien1a(530,20,30,30,3,20,530,730));
@@ -327,13 +320,24 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 		}
 		if (e.getKeyCode() == KeyEvent.VK_W)
 		{
-			keys[10] = true;
+			keys[16] = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_E)
 		{
-			keys[11] = true;
+			keys[17] = true;
 		}
-
+		if (e.getKeyCode() == KeyEvent.VK_R)
+		{
+			keys[18] = true;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_T)
+		{
+			keys[15] = true;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_Y)
+		{
+			keys[14] = true;
+		}
 		repaint();
 	}
 
@@ -381,11 +385,23 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 		}
 		if (e.getKeyCode() == KeyEvent.VK_W)
 		{
-			keys[10] = false;
+			keys[16] = false;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_E)
 		{
-			keys[11] = false;
+			keys[17] = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_R)
+		{
+			keys[18] = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_T)
+		{
+			keys[15] = false;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_Y)
+		{
+			keys[14] = false;
 		}
 		repaint();
 	}

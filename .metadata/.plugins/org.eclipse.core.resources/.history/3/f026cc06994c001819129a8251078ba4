@@ -23,7 +23,7 @@ public class Circle extends Ammo
 	
 	public Circle(int x, int y, int s, int ang, int id)
 	{
-		super(x,y,6,6,s,10);
+		super(x,y,6,6,s,8);
 		angle = ang*2*Math.PI/360;
 		r = 20;
 		ID = id;
