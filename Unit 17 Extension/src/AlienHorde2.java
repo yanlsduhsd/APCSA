@@ -52,7 +52,7 @@ public class AlienHorde2
 					||(aliens.get(i).getHeight()>50&&aliens.get(i).getY()+aliens.get(i).getHeight()>550)) {
 				if (aliens.get(i).getY()>=510||(aliens.get(i).getHeight()>50&&aliens.get(i).getY()+aliens.get(i).getHeight()>550)) {
 					counter-=2;
-					if (aliens.get(i).getHeight()>50) counter-=90;
+					if (aliens.get(i).getHeight()>50) counter-=99;
 				}
 				
 				if (aliens.get(i).getLf()<1) {

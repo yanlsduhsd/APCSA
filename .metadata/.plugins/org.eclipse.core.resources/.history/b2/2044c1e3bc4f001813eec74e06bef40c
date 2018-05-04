@@ -1,0 +1,32 @@
+//© A+ Computer Science  -  www.apluscompsci.com
+//Name -
+//Date -
+//Class - 
+//Lab  -
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+public class Test extends Ammo
+{
+	private Color col;
+
+	public Test(int x, int y, int w, int h, int s) {
+		super(x,y,w,h,s,h/2);
+		col=Color.WHITE;
+	} //do something with id and dec height instead
+
+	private void fade() {
+		if (getHeight()>0) setHeight(getHeight()-1);
+		setD(getHeight()/2);
+		int c=(int)(255*getHeight()/160.0);
+		col=new Color(c,c,c);
+	}
+	
+	public void draw( Graphics window )
+	{
+		fade();
+		window.setColor(col);
+		window.fillRect(getX(), getY(), getWidth(), getHeight());
+	}
+}

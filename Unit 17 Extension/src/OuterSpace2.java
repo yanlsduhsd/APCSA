@@ -130,14 +130,14 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 			}
 		}
 		
-		if (keys[5]) {
-			if (selected!=0) counter=0;
+		if (keys[5] && selected!=0) {
+			counter=0;
 			selected=0;
-		} else if (keys[6]) {
-			if (selected!=1) counter=0;
+		} else if (keys[6] && selected!=1) {
+			counter=0;
 			selected=1;
-		} else if (keys[7]) {
-			if (selected!=2) counter=0;
+		} else if (keys[7] && selected!=2) {
+			counter=0;
 			selected=2;
 		} else if (keys[8] && selected!=3) {
 			counter=0;
@@ -152,8 +152,7 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 				for (int i=0; i<9; i++) {
 					int x=ship.getX()+(int)(ship.getWidth()*0.5)-5+30*(i%3-1);
 					int y=ship.getY()+(int)(ship.getHeight()*0.5)-5+30*(i/3);
-					if (x>0&&x+5<783&&y>0)
-					shots.add(new Ammo(x,y,3,20));
+					if (x>0&&x+5<783&&y>0) shots.add(new Ammo(x,y,3,20));
 				}
 				counter=0;
 			}
@@ -189,9 +188,9 @@ public class OuterSpace2 extends Canvas implements KeyListener, Runnable
 			}
 		}
 		
-//		if(keys[14] && keys[3]) clock=0;
-//		else if (keys[14] && keys[1]) clock+=10;
-//		else if (keys[14] && keys[0]) clock-=10;
+//		if(keys[0] && keys[3]) clock=0;
+//		else if (keys[0] && keys[1]) clock+=10;
+//		else if (keys[0] && keys[0]) clock-=10;
 
 		graphToBack.setColor(Color.GRAY);
 		for (int i=1; i<783; i+=10) {
