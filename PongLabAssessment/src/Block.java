@@ -13,6 +13,7 @@ public class Block implements Locatable
 	private int yPos;
 	private int width;
 	private int height;
+	private int lf;
 
 	private Color color;
 
@@ -21,7 +22,8 @@ public class Block implements Locatable
 		setPos(100, 150);
 		setWidth(10);
 		setHeight(10);
-		setColor(Color.BLACK);
+		setColor(Color.RED);
+		setLf(0);
 
 	}
 
@@ -31,7 +33,8 @@ public class Block implements Locatable
 		setPos(x, y);
 		setWidth(w);
 		setHeight(h);
-		setColor(Color.BLACK);
+		setColor(Color.RED);
+		setLf(0);
 	}
 	
 	public Block( int x, int y, int w, int h, Color c) {
@@ -39,13 +42,63 @@ public class Block implements Locatable
 		setWidth(w);
 		setHeight(h);
 		setColor(c);
+		setLf(0);
+	}
+	
+	public Block( int x, int y, int w, int h, Color c, int l) {
+		setPos(x, y);
+		setWidth(w);
+		setHeight(h);
+		setColor(c);
+		setLf(l);
+	}
+	public Block( int x, int y, int w, int h, int l) {
+		setPos(x, y);
+		setWidth(w);
+		setHeight(h);
+		setLf(l);
+		checkColor();
 	}
 	
 	
+	public void dec() {
+		lf--;
+	}
+	public void dec(int a) {
+		lf-=a;
+	}
 	
-	
-	
-	
+	public void setLf(int a) {
+		lf=a;
+	}
+	public int getLf() {
+		return lf;
+	}
+	public void checkColor() {
+		if (lf==1) {
+			color=Color.RED;
+		} else if (lf==2) {
+			color=Color.ORANGE;
+		} else if (lf==3) {
+			color=Color.YELLOW;
+		} else if (lf==4) {
+			color=Color.GREEN;
+		} else if (lf==5) {
+			color=Color.CYAN;
+		} else if (lf==6) {
+			color=Color.BLUE;
+		} else if (lf==7) {
+			color=Color.MAGENTA;
+		} else if (lf==8) {
+			color=Color.PINK;
+		} else if (lf==9) {
+			color=Color.GRAY;
+		} else if (lf==10) {
+			color=Color.DARK_GRAY;
+		} else if (lf>10){
+			color=Color.BLACK;
+		}
+	}
 	
 	
 	
@@ -98,6 +151,10 @@ public class Block implements Locatable
    	//uncomment after you write the set and get methods
       window.setColor(color);
       window.fillRect(getX(), getY(), getWidth(), getHeight());
+      if (lf!=0) {
+	      window.setColor(Color.BLACK);
+		  window.drawRect(getX(), getY(), getWidth(), getHeight());
+      }
    }
 
    public void draw(Graphics window, Color col)
@@ -117,7 +174,7 @@ public class Block implements Locatable
 		//return toString().equals(obj.toString());
 	}   
 
-   //add the other get methods
+
 	@Override
 	public int getX()
 	{

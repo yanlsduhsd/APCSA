@@ -28,29 +28,30 @@ public class Pong extends Canvas implements KeyListener, Runnable
 	
 	private ArrayList<Block> bricks;
 	
-
+	private int level;
 
 	
 	public Pong()
 	{
 		
 		do {
-			randomX=(int)(Math.signum(Math.random()-0.5)*(Math.random()*2+1));
+			randomX=(int)(Math.signum(Math.random()-0.5)*(Math.random()*5+1));
 		} while (randomX==0);
 		
 		do {
-			randomY=(int)(Math.signum(Math.random()-0.5)*Math.sqrt(9-randomX*randomX));
+			randomY=(int)(Math.signum(Math.random()-0.5)*Math.sqrt(36-randomX*randomX));
 		} while (randomY==0);
 		
 		ball = new Ball(395, 257, 10, 10, Color.RED,randomX,randomY);
 		bricks = new ArrayList<Block>();
 		
-		paddle = new Paddle(50, 232, 40, 40, Color.BLUE, 3);
+		paddle = new Paddle(371, 400, 40, 40, Color.BLUE, 3);
 		
 
-		keys = new boolean[4];
+		keys = new boolean[5];
 		
-		one();
+		level = 0;
+		remove();
 		
     	setBackground(Color.WHITE);
 		setVisible(true);
@@ -59,14 +60,17 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		addKeyListener(this);		//starts the key thread to log key strokes
 	}
 	
+	
 	public void collision(Ball bal) {
 		for (int i=0; i<bricks.size(); i++) {
 			if (bal.didCollideBottom(bricks.get(i))||bal.didCollideTop(bricks.get(i))) {
 				bal.setYSpeed(-1*bal.getYSpeed());
-				bricks.remove(i--);
+				bricks.get(i).dec();
+				bricks.get(i).checkColor();
 			} else if (bal.didCollideLeft(bricks.get(i))||bal.didCollideRight(bricks.get(i))) {
 				bal.setXSpeed(-1*bal.getXSpeed());
-				bricks.remove(i--);
+				bricks.get(i).dec();
+				bricks.get(i).checkColor();
 			}
 		}
 	}
@@ -75,19 +79,68 @@ public class Pong extends Canvas implements KeyListener, Runnable
 			b.draw(g);
 		}
 	}
-//	17*23*2
+	public void remove() { 
+		for (int i=0; i<bricks.size(); i++) {
+			if (bricks.get(i).getLf()<=0) {
+				bricks.remove(i--);
+			}
+		}
+		if (bricks.size()==0) {
+			if (level==0) one();
+			else if (level==1) two();
+			else if (level==2) three();
+		}
+	}
+
 	public void one() {
+		level++;
 		for (int i=0; i<17; i++) {
-			bricks.add(new Block(1+46*i,0,46,28,Color.RED));
-			bricks.add(new Block(1+46*i,28,46,28,Color.RED));
-			bricks.add(new Block(1+46*i,504,46,28,Color.RED));
-			bricks.add(new Block(1+46*i,532,46,28,Color.RED));
+			bricks.add(new Block(1+46*i,0,46,28,2));
+			bricks.add(new Block(1+46*i,28,46,28,2));
+			bricks.add(new Block(1+46*i,504,46,28,2));
+			bricks.add(new Block(1+46*i,532,46,28,2));
 		}
 		for (int i=0; i<16; i++) {
-			bricks.add(new Block(1,56+28*i,46,28,Color.RED));
-			bricks.add(new Block(47,56+28*i,46,28,Color.RED));
-			bricks.add(new Block(691,56+28*i,46,28,Color.RED));
-			bricks.add(new Block(737,56+28*i,46,28,Color.RED));
+			bricks.add(new Block(1,56+28*i,46,28,2));
+			bricks.add(new Block(47,56+28*i,46,28,2));
+			bricks.add(new Block(691,56+28*i,46,28,2));
+			bricks.add(new Block(737,56+28*i,46,28,2));
+		}
+	}
+	
+	public void two() {
+		level++;
+		paddle.setPos(371, 400);
+		for (int i=0; i<17; i++) {
+			bricks.add(new Block(1+46*i,0,46,28,4));
+			bricks.add(new Block(1+46*i,28,46,28,4));
+			bricks.add(new Block(1+46*i,56,46,28,4));
+			bricks.add(new Block(1+46*i,532,46,28,4));
+		}
+		for (int i=0; i<9; i++) {
+			for (int j=0; j<4; j++) {
+				bricks.add(new Block(185+46*i,168+j*28,46,28,5));
+			}
+		}
+		for (int i=1; i<17; i++) {
+			bricks.add(new Block(1,56+28*i,46,28,4));
+			bricks.add(new Block(737,56+28*i,46,28,4));
+		}
+	}
+	
+	public void three() {
+		level++;
+		for (int i=0; i<17; i++) {
+			bricks.add(new Block(1+46*i,0,46,28,8));
+			bricks.add(new Block(1+46*i,28,46,28,8));
+			bricks.add(new Block(1+46*i,504,46,28,8));
+			bricks.add(new Block(1+46*i,532,46,28,8));
+		}
+		for (int i=0; i<16; i++) {
+			bricks.add(new Block(1,56+28*i,46,28,8));
+			bricks.add(new Block(47,56+28*i,46,28,8));
+			bricks.add(new Block(691,56+28*i,46,28,8));
+			bricks.add(new Block(737,56+28*i,46,28,8));
 		}
 	}
 	
@@ -124,8 +177,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		graphToBack.drawLine(0,560, 783, 560);
 
 		draw(graphToBack);
-		
-		//see if the ball hits the top or bottom wall 
+		 
 		if(!(ball.getY()>=0+Math.abs(ball.getYSpeed()) && ball.getY()<=560-ball.getYSpeed()-ball.getHeight()))
 		{
 			ball.setYSpeed(-1*ball.getYSpeed());
@@ -142,40 +194,39 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		if (ball.didCollideLeft(paddle)||ball.didCollideRight(paddle)){
 			ball.setXSpeed(-1*ball.getXSpeed());
 		}
-		
-		/*if (ball.didCollideLeft(a)||ball.didCollideLeft(b)||ball.didCollideLeft(c)||ball.didCollideLeft(d)
-				||ball.didCollideRight(a)||ball.didCollideRight(b)||ball.didCollideRight(c)||ball.didCollideRight(d)){
-			ball.setXSpeed(-1*ball.getXSpeed());
-		}
-		if (ball.didCollideTop(a)||ball.didCollideTop(b)||ball.didCollideTop(c)||ball.didCollideTop(d)
-				||ball.didCollideBottom(a)||ball.didCollideBottom(b)||ball.didCollideBottom(c)||ball.didCollideBottom(d)){
-			ball.setYSpeed(-1*ball.getYSpeed());
-		}*/
 
 
 		//see if the paddles need to be moved
 		
-		if(keys[0] == true&&paddle.getY()>0+paddle.getSpeed())
+		if(keys[0] == true&&paddle.getY()>0+paddle.getSpeed()&&paddle.clearTop(bricks))
 		{
-			paddle.moveUpAndDraw(graphToBack);
+			paddle.setY(paddle.getY()-paddle.getSpeed());
 		}
-		if(keys[1] == true&&paddle.getY()<560-paddle.getSpeed()-paddle.getHeight())
+		if(keys[1] == true&&paddle.getY()<560-paddle.getSpeed()-paddle.getHeight()&&paddle.clearBottom(bricks))
 		{
-			paddle.moveDownAndDraw(graphToBack);
+			paddle.setY(paddle.getY()+paddle.getSpeed());
 		}
-		if(keys[2] == true&&paddle.getX()>0+paddle.getSpeed())
+		if(keys[2] == true&&paddle.getX()>0+paddle.getSpeed()&&paddle.clearLeft(bricks))
 		{
-			paddle.moveLeftAndDraw(graphToBack);
+			paddle.setX(paddle.getX()-paddle.getSpeed());
 		}
-		if(keys[3] == true&&paddle.getX()<783-paddle.getSpeed()-paddle.getWidth())
+		if(keys[3] == true&&paddle.getX()<783-paddle.getSpeed()-paddle.getWidth()&&paddle.clearRight(bricks))
 		{
-			paddle.moveRightAndDraw(graphToBack);
+			paddle.setX(paddle.getX()+paddle.getSpeed());
+		}
+		
+		if(keys[4]) {
+			bricks.clear();
+			keys[4]=false;
 		}
 
 		collision(ball);
+		remove();
 
-
-
+		if (ball.getX()<0) ball.setX(0);
+		if (ball.getX()+ball.getWidth()>783) ball.setX(783-ball.getWidth());
+		if (ball.getY()<0) ball.setY(0);
+		if (ball.getY()+ball.getHeight()>783) ball.setY(783-ball.getWidth());
 
 
 		
@@ -190,6 +241,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 			case 'S' : keys[1]=true; break;
 			case 'A' : keys[2]=true; break;
 			case 'D' : keys[3]=true; break;
+			case 'P' : keys[4]=true; break;
 
 		}
 	}
@@ -202,6 +254,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 			case 'S' : keys[1]=false; break;
 			case 'A' : keys[2]=false; break;
 			case 'D' : keys[3]=false; break;
+			case 'P' : keys[4]=false; break;
 
 		}
 	}

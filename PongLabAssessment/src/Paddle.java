@@ -6,8 +6,9 @@
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
-public class Paddle extends Block
+public class Paddle extends Block implements Collidable
 {
    //instance variables
    private int speed;
@@ -108,4 +109,94 @@ public class Paddle extends Block
    public String toString() {
 	   return super.toString() + " " + speed;
    }
+   
+   public boolean clearLeft(ArrayList<Block> arr) {
+	   for (Block b: arr) {
+		   if (didCollideLeft(b)) {
+			   return false;
+		   }
+	   }
+	   return true;
+   }
+   public boolean clearRight(ArrayList<Block> arr) {
+	   for (Block b: arr) {
+		   if (didCollideRight(b)) {
+			   return false;
+		   }
+	   }
+	   return true;
+   }
+   public boolean clearTop(ArrayList<Block> arr) {
+	   for (Block b: arr) {
+		   if (didCollideTop(b)) {
+			   return false;
+		   }
+	   }
+	   return true;
+   }
+   public boolean clearBottom(ArrayList<Block> arr) {
+	   for (Block b: arr) {
+		   if (didCollideBottom(b)) {
+			   return false;
+		   }
+	   }
+	   return true;
+   }
+   
+   
+   public boolean didCollideLeft(Object obj) {
+		// TODO Auto-generated method stub
+		
+		Block b = (Block) obj;
+		
+		if (getY()+getHeight()>b.getY()&&getY()<b.getY()+b.getHeight()
+				&&getX()-getSpeed()<b.getX()+b.getWidth()&&getX()>=b.getX()+b.getWidth()) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
+	@Override
+	public boolean didCollideRight(Object obj) {
+		// TODO Auto-generated method stub
+		
+		Block b = (Block) obj;
+		
+		if (getY()+getHeight()>b.getY()&&getY()<b.getY()+b.getHeight()
+				&&getX()+getSpeed()+getWidth()>b.getX()&&getX()+getWidth()<=b.getX()) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public boolean didCollideTop(Object obj) {
+		// TODO Auto-generated method stub
+	
+		Block b = (Block) obj;
+		
+		if (getX()+getWidth()>b.getX()&&getX()<b.getWidth()+b.getX()
+				&&getY()-getSpeed()<b.getY()+b.getHeight()&&getY()>=b.getY()+b.getHeight()) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public boolean didCollideBottom(Object obj) {
+		// TODO Auto-generated method stub
+		
+		Block b = (Block) obj;
+		
+		if (getX()+getWidth()>b.getX()&&getX()<b.getWidth()+b.getX()
+				&&getY()+getSpeed()+getHeight()>b.getY()&&getY()+getHeight()<=b.getY()) {
+			return true;
+		}
+		
+		return false;
+	}
 }

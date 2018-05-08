@@ -75,7 +75,7 @@ public class Ball extends Block implements Collidable
    public void moveAndDraw(Graphics window)
    {
    	//draw a white ball at old ball location
-	  super.draw(window, Color.WHITE);
+//	  super.draw(window, Color.WHITE);
 
       setX(getX()+xSpeed);
 		//setY
