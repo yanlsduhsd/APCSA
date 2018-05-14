@@ -173,6 +173,10 @@ public class Block implements Locatable
 
 		//return toString().equals(obj.toString());
 	}   
+	
+	public int getSpeed() {
+		return 0;
+	}
 
 
 	@Override

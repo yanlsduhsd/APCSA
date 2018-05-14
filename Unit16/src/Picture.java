@@ -464,38 +464,128 @@ public class Picture extends SimplePicture
 //       }
 //  }
   
-  public void sharpen(int x, int y, int w, int h) {
-	//assuming that x and y are on the page, as with w and h
+//  public void sharpen(int x, int y, int w, int h) {
+//	//assuming that x and y are on the page, as with w and h
+//	  
+//	  Pixel toSharp, upperLeft; 
+//	  Pixel[][] pixels = this.getPixels2D();
+//	  
+//	  int r, g, b;
+//	  
+//	  for (int j=x+w-1; j>=x; j--) {
+//		  for (int i=y+h-1; i>=y; i--) {
+//
+//			  if (i==0||y==0) break;
+//			  
+//			  toSharp=pixels[i][j];
+//			  upperLeft=pixels[i-1][j-1];
+//			  
+//			  r=toSharp.getRed()+(int)(0.5*(toSharp.getRed()-upperLeft.getRed()));
+//			  g=toSharp.getGreen()+(int)(0.5*(toSharp.getGreen()-upperLeft.getGreen()));
+//			  b=toSharp.getBlue()+(int)(0.5*(toSharp.getBlue()-upperLeft.getBlue()));
+//			  
+//			  if (r>255) r=255;
+//			  if (g>255) g=255;
+//			  if (b>255) b=255;
+//			  if (r<0) r=0;
+//			  if (g<0) g=0;
+//			  if (b<0) b=0;
+//			  
+//			  toSharp.setRed(r);
+//			  toSharp.setGreen(g);
+//			  toSharp.setBlue(b);
+//		  }
+//	  }
+//  }
+  
+  public int randomness(int a) {
 	  
-	  Pixel toSharp, upperLeft; 
-	  Pixel[][] pixels = this.getPixels2D();
+  }
+  
+  
+  public void encode(Picture message) {
 	  
-	  int r, g, b;
-	  
-	  for (int j=x+w-1; j>=x; j--) {
-		  for (int i=y+h-1; i>=y; i--) {
-
-			  if (i==0||y==0) break;
-			  
-			  toSharp=pixels[i][j];
-			  upperLeft=pixels[i-1][j-1];
-			  
-			  r=toSharp.getRed()+(int)(0.5*(toSharp.getRed()-upperLeft.getRed()));
-			  g=toSharp.getGreen()+(int)(0.5*(toSharp.getGreen()-upperLeft.getGreen()));
-			  b=toSharp.getBlue()+(int)(0.5*(toSharp.getBlue()-upperLeft.getBlue()));
-			  
-			  if (r>255) r=255;
-			  if (g>255) g=255;
-			  if (b>255) b=255;
-			  if (r<0) r=0;
-			  if (g<0) g=0;
-			  if (b<0) b=0;
-			  
-			  toSharp.setRed(r);
-			  toSharp.setGreen(g);
-			  toSharp.setBlue(b);
+	  Pixel[][] messagePixels = message.getPixels2D();
+	  Pixel[][] currPixels = this.getPixels2D();
+	  Pixel currPixel = null;
+	  Pixel messagePixel = null;
+	  if (message.getHeight()/3+1>this.getHeight()||message.getWidth()/3+1>this.getWidth()) {
+		  System.out.println("Error: message image too large.");
+		  return;
+	  }
+	  for (int r=0; r<this.getHeight(); r++) {
+		  for (int c=0; c<this.getWidth(); c++) {
+			  currPixel=currPixels[r][c];
+			  currPixel.setRed(currPixel.getRed()-currPixel.getRed()%8);
+			  currPixel.setGreen(currPixel.getGreen()-currPixel.getGreen()%8);
+			  currPixel.setBlue(currPixel.getBlue()-currPixel.getBlue()%8);
 		  }
 	  }
+	  for (int r=0; r<message.getHeight(); r++) {
+		  for (int c=0; c<message.getHeight(); c++) {
+			  messagePixel=messagePixels[r][c];
+			  currPixel=currPixels[r/3][c/3];
+			  if (messagePixel.colorDistance(Color.BLACK)<50) {
+				  if (r%3==0) {
+					  currPixel.setRed(currPixel.getRed()+thing(c));
+				  } else if (r%3==1) {
+					  currPixel.setGreen(currPixel.getGreen()+thing(c));
+				  } else {
+					  currPixel.setBlue(currPixel.getBlue()+thing(c));
+				  }
+			  }
+		  }
+	  }
+  }
+  
+  public int thing(int a) {
+	  if (a%3==0) {
+		  return 1;
+	  } else if (a%3==1){
+		  return 2;
+	  } else {
+		  return 4;
+	  }
+  }
+  
+  public Picture decode() {
+	  Pixel[][] pixels = this.getPixels2D();
+	  Pixel currPixel = null;
+	  Picture messagePicture = new Picture(this.getHeight()*3, this.getWidth()*3);
+	  Pixel[][] messagePixels = messagePicture.getPixels2D();
+	  for (int r=0; r<this.getHeight(); r++) {
+		  for (int c=0; c<this.getWidth(); c++) {
+			  currPixel=pixels[r][c];
+			  if (currPixel.getRed()%2==1) {
+				  messagePixels[r*3][c*3].setColor(Color.BLACK);
+			  }
+			  if (currPixel.getRed()%4>=2) {
+				  messagePixels[r*3][c*3+1].setColor(Color.BLACK);
+			  }
+			  if (currPixel.getRed()%8>=4) {
+				  messagePixels[r*3][c*3+2].setColor(Color.BLACK);
+			  }
+			  if (currPixel.getGreen()%2==1) {
+				  messagePixels[r*3+1][c*3].setColor(Color.BLACK);
+			  }
+			  if (currPixel.getGreen()%4>=2) {
+				  messagePixels[r*3+1][c*3+1].setColor(Color.BLACK);
+			  }
+			  if (currPixel.getGreen()%8>=4) {
+				  messagePixels[r*3+1][c*3+2].setColor(Color.BLACK);
+			  }
+			  if (currPixel.getBlue()%2==1) {
+				  messagePixels[r*3+2][c*3].setColor(Color.BLACK);
+			  }
+			  if (currPixel.getBlue()%4>=2) {
+				  messagePixels[r*3+2][c*3+1].setColor(Color.BLACK);
+			  }
+			  if (currPixel.getBlue()%8>=4) {
+				  messagePixels[r*3+2][c*3+2].setColor(Color.BLACK);
+			  }
+		  }
+	  }
+	  return messagePicture;
   }
   
   /* Main method for testing - each class in Java can have a main 

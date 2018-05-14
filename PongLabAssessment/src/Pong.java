@@ -35,7 +35,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 	{
 		
 		do {
-			randomX=(int)(Math.signum(Math.random()-0.5)*(Math.random()*5+1));
+			randomX=(int)(Math.signum(Math.random()-0.5)*(Math.random()*4+2));
 		} while (randomX==0);
 		
 		do {
@@ -89,6 +89,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 			if (level==0) one();
 			else if (level==1) two();
 			else if (level==2) three();
+//			else test();
 		}
 	}
 
@@ -109,8 +110,20 @@ public class Pong extends Canvas implements KeyListener, Runnable
 	}
 	
 	public void two() {
+		
 		level++;
+		
+		do {
+			randomX=(int)(Math.signum(Math.random()-0.5)*(Math.random()*4+2));
+		} while (randomX==0);
+		
+		do {
+			randomY=(int)(Math.signum(Math.random()-0.5)*Math.sqrt(36-randomX*randomX));
+		} while (randomY==0);
+		
+		ball = new Ball(395, 297, 10, 10, Color.RED,randomX,randomY);
 		paddle.setPos(371, 400);
+		
 		for (int i=0; i<17; i++) {
 			bricks.add(new Block(1+46*i,0,46,28,4));
 			bricks.add(new Block(1+46*i,28,46,28,4));
@@ -129,7 +142,22 @@ public class Pong extends Canvas implements KeyListener, Runnable
 	}
 	
 	public void three() {
+		
 		level++;
+		
+		do {
+			randomX=(int)(Math.signum(Math.random()-0.5)*(Math.random()*4+2));
+		} while (randomX==0);
+		
+		do {
+			randomY=(int)(Math.signum(Math.random()-0.5)*Math.sqrt(36-randomX*randomX));
+		} while (randomY==0);
+		
+		ball.setPos(395, 257);
+		ball.setXSpeed(randomX);
+		ball.setYSpeed(randomY);
+		paddle.setPos(371, 400);
+		
 		for (int i=0; i<17; i++) {
 			bricks.add(new Block(1+46*i,0,46,28,8));
 			bricks.add(new Block(1+46*i,28,46,28,8));
@@ -141,6 +169,19 @@ public class Pong extends Canvas implements KeyListener, Runnable
 			bricks.add(new Block(47,56+28*i,46,28,8));
 			bricks.add(new Block(691,56+28*i,46,28,8));
 			bricks.add(new Block(737,56+28*i,46,28,8));
+		}
+	}
+	
+	public void test() {
+		ball.setPos(380, 60);
+		paddle.setPos(340, 40);
+		for (int i=0; i<5; i++) {
+			bricks.add(new Block(277+46*i,0,46,28,99));
+			bricks.add(new Block(277+46*i,84,46,28,99));
+		}
+		for (int i=0; i<2; i++) {
+			bricks.add(new Block(277,28+28*i,46,28,99));
+			bricks.add(new Block(461,28+28*i,46,28,99));
 		}
 	}
 	

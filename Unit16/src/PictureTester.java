@@ -151,14 +151,23 @@ public class PictureTester
 //    swan3.explore();
 //  }
 
-	public static void testSharpen(int x, int y, int w, int h)
-	{
-	     Picture redMoto = new Picture("redMotorcycle.jpg");
-	     redMoto.explore();
-	     redMoto.sharpen(x,y,w,h);
-	     redMoto.explore();
-	}
+//	public static void testSharpen(int x, int y, int w, int h)
+//	{
+//	     Picture redMoto = new Picture("redMotorcycle.jpg");
+//	     redMoto.explore();
+//	     redMoto.sharpen(x,y,w,h);
+//	     redMoto.explore();
+//	}
 
+	public static void testEncode() {
+		Picture image = new Picture("moon-surface.jpg");
+		image.explore();
+		image.encode(new Picture("crybytes-apple_icon.jpg"));
+		image.explore();
+		image.decode().explore();
+		Picture test=new Picture("crybytes-apple_icon.jpg");
+		test.explore();
+	}
   
   /** Main method for testing.  Every class can have a main
     * method in Java */
@@ -192,7 +201,8 @@ public class PictureTester
     //testSetRedToHalfValueInTopHalf();
     //testClearBlueOverValue(200);
     //testGetAverageForColumn(0);
-	  testSharpen(50,50,500,400);
+//	  testSharpen(50,50,500,400);
 	  //testSharpen(170,180,90,90);
+	  testEncode();
   }
 }
