@@ -165,5 +165,17 @@ public class Ball extends Block implements Collidable
 		return false;
 	}
 	
+	public boolean didCollideLeft(Object obj, boolean up, boolean down, boolean left, boolean right) {
+		
+		Block b = (Block) obj;
+		
+		if (getY()+getYSpeed()+getHeight()>=b.getY()&&getY()+getYSpeed()<=b.getY()+b.getHeight()
+				&&getX()+getXSpeed()<b.getX()+b.getWidth()&&getX()>=b.getX()+b.getWidth()) {
+			return true;
+		}
+		
+		return false;
+	}
+
 
 }

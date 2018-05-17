@@ -498,8 +498,8 @@ public class Picture extends SimplePicture
 //	  }
 //  }
   
-  public long randomness(long a) {
-	  return (16807*a)%2147483647;
+  public int randomness(int a) {
+	  
   }
   
   
@@ -509,12 +509,10 @@ public class Picture extends SimplePicture
 	  Pixel[][] currPixels = this.getPixels2D();
 	  Pixel currPixel = null;
 	  Pixel messagePixel = null;
-	  
 	  if (message.getHeight()/3+1>this.getHeight()||message.getWidth()/3+1>this.getWidth()) {
 		  System.out.println("Error: message image too large.");
 		  return;
 	  }
-	 
 	  for (int r=0; r<this.getHeight(); r++) {
 		  for (int c=0; c<this.getWidth(); c++) {
 			  currPixel=currPixels[r][c];
@@ -523,7 +521,6 @@ public class Picture extends SimplePicture
 			  currPixel.setBlue(currPixel.getBlue()-currPixel.getBlue()%8);
 		  }
 	  }
-	  
 	  for (int r=0; r<message.getHeight(); r++) {
 		  for (int c=0; c<message.getHeight(); c++) {
 			  messagePixel=messagePixels[r][c];
@@ -538,65 +535,6 @@ public class Picture extends SimplePicture
 				  }
 			  }
 		  }
-	  }
-	 
-	  long num = 1846254375;
-	  for (int r=0; r<this.getHeight(); r++) {
-		  for (int c=0; c<this.getWidth(); c++) {
-			  currPixel=currPixels[r][c];
-			  num=randomness(num);
-			  if (num%2==1) {
-				  XOR(currPixel);
-			  }
-		  }
-	  }
-  }
-  
-  public void XOR(Pixel p) {
-	  if (p.getRed()%2==1) {
-		  p.setRed(p.getRed()-1);
-	  } else {
-		  p.setRed(p.getRed()+1);
-	  }
-	  if (p.getRed()%4>=2) {
-		  p.setRed(p.getRed()-2);
-	  } else {
-		  p.setRed(p.getRed()+2);
-	  }
-	  if (p.getRed()%8>=4) {
-		  p.setRed(p.getRed()-4);
-	  } else {
-		  p.setRed(p.getRed()+4);
-	  }
-	  if (p.getGreen()%2==1) {
-		  p.setGreen(p.getGreen()-1);
-	  } else {
-		  p.setGreen(p.getGreen()+1);
-	  }
-	  if (p.getGreen()%4>=2) {
-		  p.setGreen(p.getGreen()-2);
-	  } else {
-		  p.setGreen(p.getGreen()+2);
-	  }
-	  if (p.getGreen()%8>=4) {
-		  p.setGreen(p.getGreen()-4);
-	  } else {
-		  p.setGreen(p.getGreen()+4);
-	  }
-	  if (p.getBlue()%2==1) {
-		  p.setBlue(p.getBlue()-1);
-	  } else {
-		  p.setBlue(p.getBlue()+1);
-	  }
-	  if (p.getBlue()%4>=2) {
-		  p.setBlue(p.getBlue()-2);
-	  } else {
-		  p.setBlue(p.getBlue()+2);
-	  }
-	  if (p.getBlue()%8>=4) {
-		  p.setBlue(p.getBlue()-4);
-	  } else {
-		  p.setBlue(p.getBlue()+4);
 	  }
   }
   
@@ -615,18 +553,6 @@ public class Picture extends SimplePicture
 	  Pixel currPixel = null;
 	  Picture messagePicture = new Picture(this.getHeight()*3, this.getWidth()*3);
 	  Pixel[][] messagePixels = messagePicture.getPixels2D();
-	  
-	  long num = 1846254375;
-	  for (int r=0; r<this.getHeight(); r++) {
-		  for (int c=0; c<this.getWidth(); c++) {
-			  currPixel=pixels[r][c];
-			  num=randomness(num);
-			  if (num%2==1) {
-				  XOR(currPixel);
-			  }
-		  }
-	  }	  
-	  
 	  for (int r=0; r<this.getHeight(); r++) {
 		  for (int c=0; c<this.getWidth(); c++) {
 			  currPixel=pixels[r][c];

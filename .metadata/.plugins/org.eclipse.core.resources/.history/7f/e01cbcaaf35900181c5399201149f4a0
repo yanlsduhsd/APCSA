@@ -160,20 +160,13 @@ public class PictureTester
 //	}
 
 	public static void testEncode() {
-		Picture image = new Picture("beach.jpg");
+		Picture image = new Picture("moon-surface.jpg");
 		image.explore();
 		image.encode(new Picture("crybytes-apple_icon.jpg"));
 		image.explore();
 		image.decode().explore();
 		Picture test=new Picture("crybytes-apple_icon.jpg");
 		test.explore();
-		
-//		image = new Picture("beach.jpg");
-//		image.explore();
-//		image.encode(new Picture("msg.jpg"));
-//		image.decode().explore();
-//		test=new Picture("msg.jpg");
-//		test.explore();
 	}
   
   /** Main method for testing.  Every class can have a main

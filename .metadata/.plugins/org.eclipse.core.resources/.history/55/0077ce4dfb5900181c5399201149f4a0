@@ -168,12 +168,12 @@ public class PictureTester
 		Picture test=new Picture("crybytes-apple_icon.jpg");
 		test.explore();
 		
-//		image = new Picture("beach.jpg");
-//		image.explore();
-//		image.encode(new Picture("msg.jpg"));
-//		image.decode().explore();
-//		test=new Picture("msg.jpg");
-//		test.explore();
+		image = new Picture("beach.jpg");
+		image.explore();
+		image.encode(new Picture("msg.jpg"));
+		image.decode().explore();
+		test=new Picture("msg.jpg");
+		test.explore();
 	}
   
   /** Main method for testing.  Every class can have a main

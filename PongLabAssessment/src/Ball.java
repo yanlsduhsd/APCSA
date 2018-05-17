@@ -164,18 +164,91 @@ public class Ball extends Block implements Collidable
 		
 		return false;
 	}
+
+
 	
-	public boolean didCollideLeft(Object obj, boolean up, boolean down, boolean left, boolean right) {
+	public boolean didCollideLeft(Object obj, boolean l, boolean r, boolean u, boolean d) {
+		// TODO Auto-generated method stub
 		
 		Block b = (Block) obj;
+		int x = b.getX();
+		int y = b.getY();
 		
-		if (getY()+getYSpeed()+getHeight()>=b.getY()&&getY()+getYSpeed()<=b.getY()+b.getHeight()
-				&&getX()+getXSpeed()<b.getX()+b.getWidth()&&getX()>=b.getX()+b.getWidth()) {
+		if (l) x+=b.getSpeed();
+		if (r) x-=b.getSpeed();
+		if (u) y+=b.getSpeed();
+		if (d) y-=b.getSpeed();
+		
+		if (getY()+getYSpeed()+getHeight()>=y&&getY()+getYSpeed()<=y+b.getHeight()
+				&&getX()+getXSpeed()<x+b.getWidth()&&getX()>=x+b.getWidth()) {
 			return true;
 		}
 		
 		return false;
 	}
-
+	
+	
+	
+	public boolean didCollideRight(Object obj, boolean l, boolean r, boolean u, boolean d) {
+		// TODO Auto-generated method stub
+		
+		Block b = (Block) obj;
+		int x = b.getX();
+		int y = b.getY();
+		
+		if (l) x+=b.getSpeed();
+		if (r) x-=b.getSpeed();
+		if (u) y+=b.getSpeed();
+		if (d) y-=b.getSpeed();
+		
+		if (getY()+getYSpeed()+getHeight()>=y&&getY()+getYSpeed()<=y+b.getHeight()
+				&&getX()+getXSpeed()+getWidth()>x&&getX()+getWidth()<=x) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
+	public boolean didCollideTop(Object obj, boolean l, boolean r, boolean u, boolean d) {
+		// TODO Auto-generated method stub
+	
+		Block b = (Block) obj;
+		int x = b.getX();
+		int y = b.getY();
+		
+		if (l) x+=b.getSpeed();
+		if (r) x-=b.getSpeed();
+		if (u) y+=b.getSpeed();
+		if (d) y-=b.getSpeed();
+		
+		if (getX()+getXSpeed()+getWidth()>=x&&getX()+getXSpeed()<=b.getWidth()+x
+				&&getY()+getYSpeed()<y+b.getHeight()&&getY()>=y+b.getHeight()) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
+	public boolean didCollideBottom(Object obj, boolean l, boolean r, boolean u, boolean d) {
+		// TODO Auto-generated method stub
+		
+		Block b = (Block) obj;
+		int x = b.getX();
+		int y = b.getY();
+		
+		if (l) x+=b.getSpeed();
+		if (r) x-=b.getSpeed();
+		if (u) y+=b.getSpeed();
+		if (d) y-=b.getSpeed();
+		
+		if (getX()+getXSpeed()+getWidth()>=x&&getX()+getXSpeed()<=b.getWidth()+x
+				&&getY()+getYSpeed()+getHeight()>y&&getY()+getHeight()<=y) {
+			return true;
+		}
+		
+		return false;
+	}
 
 }

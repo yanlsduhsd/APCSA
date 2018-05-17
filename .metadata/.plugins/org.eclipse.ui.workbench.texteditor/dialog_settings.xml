@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="1600" key="selection"/>
+		<item value="b.get" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="b.get"/>
 			<item value="160"/>
 			<item value="AlienHorde2"/>
 			<item value="Bullets"/>
@@ -15,7 +16,6 @@
 			<item value="OuterSpace2"/>
 			<item value="Ammo"/>
 			<item value="Burst"/>
-			<item value="Color.BLUE"/>
 		</list>
 		<list key="replacehistory">
 			<item value="1600"/>

@@ -229,10 +229,10 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		}
 		
 		
-		if (ball.didCollideTop(paddle)||ball.didCollideBottom(paddle)){
+		if (ball.didCollideTop(paddle, keys[2], keys[3], keys[0], keys[1])||ball.didCollideBottom(paddle, keys[2], keys[3], keys[0], keys[1])){
 			ball.setYSpeed(-1*ball.getYSpeed());
 		}
-		if (ball.didCollideLeft(paddle)||ball.didCollideRight(paddle)){
+		if (ball.didCollideLeft(paddle, keys[2], keys[3], keys[0], keys[1])||ball.didCollideRight(paddle, keys[2], keys[3], keys[0], keys[1])){
 			ball.setXSpeed(-1*ball.getXSpeed());
 		}
 
