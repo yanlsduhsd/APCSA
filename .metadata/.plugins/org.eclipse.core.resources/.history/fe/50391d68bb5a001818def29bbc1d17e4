@@ -510,8 +510,7 @@ public class Picture extends SimplePicture
 	  Pixel currPixel = null;
 	  Pixel messagePixel = null;
 	  
-	  if (message.getHeight()/3+1>this.getHeight()
-			  ||message.getWidth()/3+1>this.getWidth()) {
+	  if (message.getHeight()/3+1>this.getHeight()||message.getWidth()/3+1>this.getWidth()) {
 		  System.out.println("Error: message image too large.");
 		  return;
 	  }
